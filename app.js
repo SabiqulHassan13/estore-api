@@ -1,6 +1,7 @@
 const express = require("express");
 
-const apiRoutes = require("./routes/api-routes");
+const userRoutes = require("./routes/user-routes");
+const productRoutes = require("./routes/product-routes");
 
 const app = express();
 
@@ -8,7 +9,8 @@ const app = express();
 app.use(express.json());
 
 // route list
-app.use("/api", apiRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 const port = 3000;
 app.listen(port, () => {
