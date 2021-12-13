@@ -1,10 +1,10 @@
 const USER_LIST = [];
 
-exports.fetchUserList = (req, res) => {
+exports.getUserList = (req, res) => {
   return res.status(200).json(USER_LIST);
 };
 
-exports.fetchUserDetail = (req, res) => {
+exports.getUserDetail = (req, res) => {
   const { id: userId } = req.params;
 
   const user = USER_LIST.find((user) => user.id === userId);
