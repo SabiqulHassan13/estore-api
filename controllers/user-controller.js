@@ -1,7 +1,28 @@
-const USER_LIST = [];
+// const USER_LIST = [];
+const User = require("../models/user-model");
 
-exports.getUserList = (req, res) => {
-  return res.status(200).json(USER_LIST);
+exports.createUser = async (req, res) => {
+  const { username, email, password, c_password } = req.body;
+
+  // add validation
+
+  try {
+    const user = await User.create({ username, email, password });
+
+    return res.status(201).json({ message: "User created successfully", user });
+  } catch (err) {
+    return res.json(err);
+  }
+};
+
+exports.getUserList = async (req, res) => {
+  try {
+    const users = await User.findAll();
+
+    return res.status(200).json(users);
+  } catch (err) {
+    return res.json(err);
+  }
 };
 
 exports.getUserDetail = (req, res) => {
@@ -11,19 +32,4 @@ exports.getUserDetail = (req, res) => {
 
   //   return res.status(200).json("fetch user detail " + userId);
   return res.status(200).json(user);
-};
-
-exports.createUser = (req, res) => {
-  const { username, email, password, c_password } = req.body;
-
-  const newUser = {
-    id: USER_LIST.length + 1,
-    username,
-    email,
-    password,
-  };
-
-  USER_LIST.push(newUser);
-
-  return res.status(201).json("user created");
 };
