@@ -11,7 +11,7 @@ app.use(express.json());
 
 // route list
 app.use("/api/users", userRoutes);
-app.use("/api/products", productRoutes);
+// app.use("/api/products", productRoutes);
 
 const port = 3000;
 app.listen(port, () => {
