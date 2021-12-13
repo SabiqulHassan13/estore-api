@@ -5,14 +5,14 @@ const UserController = require("../controllers/user-controller");
 const router = express.Router();
 
 // user routes
-router.get("/users", UserController.getUserList);
+router.get("/", UserController.getUserList);
 
-router.get("/users/:id", UserController.getUserDetail);
+router.get("/:id", UserController.getUserDetail);
 
-router.post("/users", UserController.createUser);
+router.post("/", UserController.createUser);
 
-// router.put("/users/:id", UserController.updateUser);
+router.put("/:id", UserController.updateUser);
 
-// router.delete("/users/:id", UserController.deleteUser);
+router.delete("/:id", UserController.deleteUser);
 
 module.exports = router;
