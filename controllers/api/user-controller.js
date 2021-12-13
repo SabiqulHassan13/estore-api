@@ -7,7 +7,10 @@ exports.fetchUserList = (req, res) => {
 exports.fetchUserDetail = (req, res) => {
   const { id: userId } = req.params;
 
-  return res.status(200).json("fetch user detail " + userId);
+  const user = USER_LIST.find((user) => user.id === userId);
+
+  //   return res.status(200).json("fetch user detail " + userId);
+  return res.status(200).json(user);
 };
 
 exports.createUser = (req, res) => {
