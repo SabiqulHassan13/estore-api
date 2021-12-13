@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = require("../utils/db-mysql");
+const sequelize = require("../utils/db-sequelize");
 
 const User = sequelize.define(
   "User",
@@ -23,7 +23,7 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    is_admin: {
+    isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: 0,
     },

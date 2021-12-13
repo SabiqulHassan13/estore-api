@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = require("../utils/db-mysql");
+const sequelize = require("../utils/db-sequelize");
 
 const Product = sequelize.define(
   "Product",
@@ -23,7 +23,7 @@ const Product = sequelize.define(
       type: DataTypes.INTEGER,
       defaultValue: 5,
     },
-    image_url: {
+    imageUrl: {
       type: DataTypes.STRING,
     },
   },
