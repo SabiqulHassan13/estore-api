@@ -1,10 +1,13 @@
 const express = require("express");
 
+const webRoutes = require("./routes/web-routes");
+const apiRoutes = require("./routes/api-routes");
+
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// route list
+app.use("/", webRoutes);
+app.use("/api", apiRoutes);
 
 const port = 3000;
 app.listen(port, () => {
