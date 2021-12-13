@@ -2,8 +2,8 @@ const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = require("../utils/db-mysql");
 
-const User = sequelize.define(
-  "User",
+const Product = sequelize.define(
+  "Product",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,21 +11,20 @@ const User = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    username: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.DECIMAL(4, 2),
       allowNull: false,
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    qty: {
+      type: DataTypes.INTEGER,
+      defaultValue: 5,
     },
-    is_admin: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: 0,
+    image_url: {
+      type: DataTypes.STRING,
     },
   },
   {
@@ -33,4 +32,4 @@ const User = sequelize.define(
   }
 );
 
-module.exports = User;
+module.exports = Product;
