@@ -1,12 +1,13 @@
 const express = require("express");
 
-const webRoutes = require("./routes/web-routes");
 const apiRoutes = require("./routes/api-routes");
 
 const app = express();
 
+// middleware list
+app.use(express.json());
+
 // route list
-app.use("/", webRoutes);
 app.use("/api", apiRoutes);
 
 const port = 3000;
