@@ -25,11 +25,65 @@ exports.getUserList = async (req, res) => {
   }
 };
 
-exports.getUserDetail = (req, res) => {
+exports.getUserDetail = async (req, res) => {
   const { id: userId } = req.params;
 
-  const user = USER_LIST.find((user) => user.id === userId);
+  try {
+    const user = await User.findAll({
+      where: {
+        id: userId,
+      },
+    });
 
-  //   return res.status(200).json("fetch user detail " + userId);
-  return res.status(200).json(user);
+    if (user) {
+      return res.status(200).json(user);
+    } else {
+      return res.status(404).json({ message: "Not Found" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.json(err);
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  const { id: userId } = req.params;
+
+  try {
+    const user = await User.findAll({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (user) {
+      return res.status(200).json(user);
+    } else {
+      return res.status(404).json({ message: "Not Found" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.json(err);
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  const { id: userId } = req.params;
+
+  try {
+    const user = await User.destroy({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (user) {
+      return res.status(200).json(user);
+    } else {
+      return res.status(404).json({ message: "Not Found" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.json(err);
+  }
 };
