@@ -3,10 +3,7 @@ const express = require("express");
 
 const { connectDB } = require("./utils/db-sequelize");
 const userRoutes = require("./routes/user-routes");
-// const productRoutes = require("./routes/product-routes");
-
-// const User = require("./models/user-model");
-// const Product = require("./models/product-model");
+const productRoutes = require("./routes/product-routes");
 
 const app = express();
 
@@ -27,7 +24,7 @@ app.use(express.json());
 
 // route list
 app.use("/api/users", userRoutes);
-// app.use("/api/products", productRoutes);
+app.use("/api/products", productRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
