@@ -30,3 +30,19 @@ exports.findAllProducts = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+exports.findProductById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const product = await Product.findOne({ where: { id } });
+
+    if (product === null) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    return res.status(200).json({ product });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
