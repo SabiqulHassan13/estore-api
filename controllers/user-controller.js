@@ -4,9 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user-model");
 
 exports.createNewUser = async (req, res) => {
-  const { username, email, password, c_password } = req.body;
-
-  // add validation
+  const { username, email, password } = req.body;
 
   try {
     // check if user exist
@@ -116,8 +114,6 @@ exports.findUserById = async (req, res) => {
 
 exports.updateUserById = async (req, res) => {
   const { id } = req.params;
-
-  // add validation
 
   try {
     const user = await User.update(req.body, { where: { id } });

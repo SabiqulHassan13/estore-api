@@ -62,3 +62,19 @@ exports.updateProductById = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+exports.deleteProductById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const product = await Product.destroy({ where: { id } });
+
+    if (product == 1) {
+      return res.status(200).json({ message: "Product deleted successfully" });
+    } else {
+      return res.status(404).json({ message: "Product not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
