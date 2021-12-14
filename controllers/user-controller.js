@@ -1,4 +1,40 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const User = require("../models/user-model");
+
+exports.createNewUser = async (req, res) => {
+  const { username, email, password, c_password } = req.body;
+
+  // add validation
+
+  try {
+    // check if user exist
+    const userFound = await User.findOne({ where: { email } });
+
+    // if found previous user then 400
+    if (userFound) {
+      return res.status(400).json({
+        message: "User already exists",
+      });
+    }
+
+    // otherwise hash password then
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // create a new user
+    const user = { username, email, password: hashedPassword };
+    const newUser = await User.create(user);
+
+    return res
+      .status(201)
+      .json({ message: "User created successfully", newUser });
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message || "Create new user Failed",
+    });
+  }
+};
 
 exports.findAllUsers = async (req, res) => {
   try {
@@ -27,22 +63,6 @@ exports.findUserById = async (req, res) => {
     return res.status(200).json({ user });
   } catch (err) {
     return res.status(500).json({ message: err.message });
-  }
-};
-
-exports.createNewUser = async (req, res) => {
-  const { username, email, password, c_password } = req.body;
-
-  // add validation
-
-  try {
-    const user = await User.create({ username, email, password });
-
-    return res.status(201).json({ message: "User created successfully", user });
-  } catch (err) {
-    return res.status(500).json({
-      message: err.message || "Create new user Failed",
-    });
   }
 };
 
