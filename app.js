@@ -8,15 +8,6 @@ const productRoutes = require("./routes/product-routes");
 const app = express();
 
 // db connection check
-// sequelize
-//   .sync()
-//   .then((result) => console.log(result))
-//   .catch((err) => console.log(err));
-
-// sequelize
-//     .authenticate()
-//     .then(() => console.log("Database connected successfully..."))
-//     .catch((err) => console.log("Database connection failed: " + err));
 connectDB();
 
 // middleware list
