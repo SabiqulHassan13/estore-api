@@ -49,6 +49,8 @@ exports.createNewUser = async (req, res) => {
 exports.updateUserById = async (req, res) => {
   const { id } = req.params;
 
+  // add validation
+
   try {
     const user = await User.update(req.body, { where: { id } });
 
