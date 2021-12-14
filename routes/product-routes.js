@@ -6,11 +6,9 @@ const validateRequest = require("../utils/validate-request");
 const { createProductSchema } = require("../schemas/product-schema");
 
 // product routes
-router.post(
-  "/",
-  validateRequest(createProductSchema),
-  ProductController.createNewProduct
-);
+// validateRequest(createProductSchema),
+
+router.post("/", ProductController.createNewProduct);
 router.get("/", ProductController.findAllProducts);
 router.get("/:id", ProductController.findProductById);
 router.put("/:id", ProductController.updateProductById);
