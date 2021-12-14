@@ -1,7 +1,6 @@
-// const USER_LIST = [];
 const User = require("../models/user-model");
 
-exports.createUser = async (req, res) => {
+exports.createNewUser = async (req, res) => {
   const { username, email, password, c_password } = req.body;
 
   // add validation
@@ -15,7 +14,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.getUserList = async (req, res) => {
+exports.findAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
 
@@ -25,7 +24,7 @@ exports.getUserList = async (req, res) => {
   }
 };
 
-exports.getUserDetail = async (req, res) => {
+exports.findUserById = async (req, res) => {
   const { id: userId } = req.params;
 
   try {
@@ -46,7 +45,7 @@ exports.getUserDetail = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateUserById = async (req, res) => {
   const { id: userId } = req.params;
 
   try {
@@ -67,7 +66,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteUserById = async (req, res) => {
   const { id: userId } = req.params;
 
   try {
