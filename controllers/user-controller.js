@@ -75,7 +75,7 @@ exports.loginCurrentUser = async (req, res) => {
 
     return res.status(201).json({
       userData,
-      accessToken,
+      accessToken: token,
     });
   } catch (err) {
     return res.status(500).json({
