@@ -31,7 +31,55 @@ exports.createNewUser = async (req, res) => {
       .json({ message: "User created successfully", newUser });
   } catch (err) {
     return res.status(500).json({
-      message: err.message || "Create new user Failed",
+      message: err.message || "User registration failed",
+    });
+  }
+};
+
+exports.loginCurrentUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // check if user exist
+    const user = await User.findOne({ where: { email } });
+
+    // if found no user then 404
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // otherwise check password match
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    // if not match
+    if (!isMatch) {
+      return res.status(401).json({
+        accessToken: null,
+        message: "Invalid Password!",
+      });
+    }
+
+    // otherwise return user with accessToken
+    const userData = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    };
+
+    const token = jwt.sign(userData, process.env.JWT_SECRET_KEY, {
+      expiresIn: 86400, // 24 hours
+    });
+
+    return res.status(201).json({
+      userData,
+      accessToken,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message || "User login failed",
     });
   }
 };
