@@ -1,12 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 
-const sequelize = require("./utils/db-sequelize");
+const { connectDB } = require("./utils/db-sequelize");
 const userRoutes = require("./routes/user-routes");
 // const productRoutes = require("./routes/product-routes");
 
-const User = require("./models/user-model");
-const Product = require("./models/product-model");
+// const User = require("./models/user-model");
+// const Product = require("./models/product-model");
 
 const app = express();
 
@@ -15,10 +15,12 @@ const app = express();
 //   .sync()
 //   .then((result) => console.log(result))
 //   .catch((err) => console.log(err));
-sequelize
-  .authenticate()
-  .then(() => console.log("Database connected successfully..."))
-  .catch((err) => console.log("Database connection failed: " + err));
+
+// sequelize
+//     .authenticate()
+//     .then(() => console.log("Database connected successfully..."))
+//     .catch((err) => console.log("Database connection failed: " + err));
+connectDB();
 
 // middleware list
 app.use(express.json());

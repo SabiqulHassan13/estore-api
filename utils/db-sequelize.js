@@ -7,4 +7,15 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   dialect: "mysql",
 });
 
-module.exports = sequelize;
+const connectDB = async () => {
+  try {
+    const result = await sequelize.authenticate();
+    console.log("Database connected successfully...");
+    return;
+  } catch (err) {
+    console.log("Database connection failed: " + err);
+  }
+};
+
+// module.exports = sequelize;
+module.exports = { sequelize, connectDB };
